@@ -37,18 +37,37 @@ namespace GraphicsTest
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
+            
             myPen.Width = 1;
             g = canvas.CreateGraphics();
             for (int i = 0; i < Int32.Parse(vipu3.Text); i++)
             {
                 DrawLine();
                 myPen.Color = RandomPenColor();
+                myVipu3 *= rnd.Next(2);
+                myVipu2++;
+                myVipu4++;
             }
         }
 
         private Color RandomPenColor()
         {
-            return Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            int i = rnd.Next(0, 5);
+            switch (i)
+            {
+                case 0:
+                    return Color.FromArgb(21, 127, 0);
+                case 1:
+                    return Color.FromArgb(106, 255, 76);
+                case 2:
+                    return Color.FromArgb(53, 127, 38);
+                case 3:
+                    return Color.FromArgb(34, 204, 0);
+                case 4:
+                    return Color.FromArgb(42, 255, 0);
+                default:
+                    return Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255));
+            }
         }
 
         private void DrawLine()     
@@ -63,13 +82,15 @@ namespace GraphicsTest
             };
 
             g.DrawLines(myPen, points);
+            
             myPen.Width += myVipu1;
-            startX = endX;
-            startY = endY;
+            startX = (int)(endX);
+            startY = (int)(endY);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Size = new System.Drawing.Size(600, 600);
             myVipu1 = Int32.Parse(vipu1.Text);
             myVipu2 = Int32.Parse(vipu2.Text);
             myVipu3 = Int32.Parse(vipu3.Text);
